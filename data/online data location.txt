@@ -3,4 +3,6 @@ https://insights.stackoverflow.com/survey
 
 They are in a google drive link in a zip file that I cannot open directly from code and are too large to upload to github
 
-the unizipped files directory must be placed in "/data" in the project directory
+This repository comes with a processed data set to use, so it is not needed to download the survey data unless you want see the raw source
+
+Place the unzipped folders into the data folder in the repo
