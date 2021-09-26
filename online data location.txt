@@ -1,0 +1,6 @@
+The surveys for the year 2021, 2019, 2018, and 2017 are located at:
+https://insights.stackoverflow.com/survey
+
+They are in a google drive link in a zip file that I cannot open directly from code and are too large to upload to github
+
+the unizipped files directory must be placed in "/data" in the project directory
