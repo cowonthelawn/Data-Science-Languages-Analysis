@@ -1,4 +1,6 @@
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import numpy as np
 import pandas as pd
 from os.path import exists
@@ -29,42 +31,46 @@ def main():
 
     # plot a column chart of the count of each language    
     print("Creating charts")
-    plt.style.use("ggplot")
+    fig1, ax1 = plt.subplots(1)
+
     num_column_groups = 3
     counts_worked_2021 = (python_worked[2021], r_worked[2021], julia_worked[2021])
     counts_want_2021 = (python_want[2021], r_want[2021], julia_want[2021])
 
     column_group_pos = np.arange(num_column_groups)
     width = 0.35
-    plt.bar(column_group_pos, counts_worked_2021, width, label="Worked with", color="steelblue")
-    plt.bar(column_group_pos + width, counts_want_2021, width, label="Want to work with", color="darkorange")
+    ax1.bar(column_group_pos, counts_worked_2021, width, label="Worked with", color="steelblue")
+    ax1.bar(column_group_pos + width, counts_want_2021, width, label="Want to work with", color="darkorange")
 
-    plt.xlabel("Language")
-    plt.ylabel("Percent of Developers")
-    plt.title("Use of and Interest in Data Science Languages in 2021")
-    plt.xticks(column_group_pos + width / 2, ("Python", "R", "Julia"))
-    plt.ylim(ymin=0, ymax=1)
-    plt.gca().set_yticklabels(['{:.0f}%'.format(x * 100) for x in plt.gca().get_yticks()])
-    plt.legend(loc="best")
+    ax1.set_xlabel("Language")
+    ax1.set_ylabel("Percent of Developers")
+    ax1.set_title("Use of and Interest in Data Science Languages in 2021")
+    ax1.set_xticks(column_group_pos + width / 2)
+    ax1.set_xticklabels(["Python", "R", "Julia"])
+    ax1.set_ylim(ymin=0, ymax=1)
+    ax1.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
+    ax1.legend(loc="best")
     plt.show()
 
     # plot line chart showing growth of developers using Julia and wanting to use Julia
     # missing 2019 data points for Julia
+    fig2, ax2 = plt.subplots(1)
     years = (2017, 2018, 2020, 2021)
     worked_julia = (julia_worked[2017], julia_worked[2018], julia_worked[2020], julia_worked[2021])
     want_julia = (julia_want[2017], julia_want[2018], julia_want[2020], julia_want[2021])
-    plt.plot(years, worked_julia, marker="o", label="Worked with Julia", color="steelblue")
-    plt.plot(years, want_julia, marker="o", label="Want to work with Julia", color="mediumseagreen")
+    ax2.plot(years, worked_julia, marker="o", label="Worked with Julia", color="steelblue")
+    ax2.plot(years, want_julia, marker="o", label="Want to work with Julia", color="mediumseagreen")
 
-    plt.ylabel("Percent of Developers")
-    plt.title("Growth of Use and Interest in Julia")
-    plt.xticks((2017, 2018, 2019, 2020, 2021))
-    plt.ylim(ymin=0, ymax=0.18)
-    plt.gca().set_yticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_yticks()])
-    plt.legend(loc="best")
+    ax2.set_ylabel("Percent of Developers")
+    ax2.set_title("Growth of Use and Interest in Julia")
+    ax2.set_xticks((2017, 2018, 2019, 2020, 2021))
+    ax2.set_ylim(ymin=0, ymax=0.18)
+    ax2.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=None))
+    ax2.legend(loc="best")
     plt.show()
 
     # plot line chart showing growth of developers using and and wanting to use Python and R
+    fig3, ax3 = plt.subplots(1)
     python_color = "mediumseagreen"
     r_color = "steelblue"
     years = (2017, 2018, 2019, 2020, 2021)
@@ -72,18 +78,18 @@ def main():
     want_python = (python_want[2017], python_want[2018], python_want[2019], python_want[2020], python_want[2021])
     worked_r = (r_worked[2017], r_worked[2018], r_worked[2019], r_worked[2020], r_worked[2021])
     want_r = (r_want[2017], r_want[2018], r_want[2019], r_want[2020], r_want[2021])
-    plt.plot(years, worked_python, marker="o", linestyle="solid", color=python_color, label="Worked with Python")
-    plt.plot(years, want_python, marker="o", linestyle="dashed", color=python_color, label="Want to work with Python")
-    plt.plot(years, worked_r, marker="o", linestyle="solid", color=r_color, label="Worked with R")
-    plt.plot(years, want_r, marker="o",  linestyle="dashed", color=r_color, label="Want to work with R")
+    ax3.plot(years, worked_python, marker="o", linestyle="solid", color=python_color, label="Worked with Python")
+    ax3.plot(years, want_python, marker="o", linestyle="dashed", color=python_color, label="Want to work with Python")
+    ax3.plot(years, worked_r, marker="o", linestyle="solid", color=r_color, label="Worked with R")
+    ax3.plot(years, want_r, marker="o",  linestyle="dashed", color=r_color, label="Want to work with R")
 
-    plt.ylabel("Percent of Developers")
-    plt.title("Growth of Use and Interest in Python and R")
-    plt.xticks((2017, 2018, 2019, 2020, 2021))
-    plt.ylim(ymin=0, ymax=1)
-    plt.gca().set_yticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_yticks()])
-    plt.legend(loc="best")
-    plt.annotate("Python2 deprecated", xy=(2020, python_want[2020]), xytext=(-30, -30),
+    ax3.set_ylabel("Percent of Developers")
+    ax3.set_title("Growth of Use and Interest in Python and R")
+    ax3.set_xticks((2017, 2018, 2019, 2020, 2021))
+    ax3.set_ylim(ymin=0, ymax=1)
+    ax3.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=None))
+    ax3.legend(loc="best")
+    ax3.annotate("Python2 deprecated", xy=(2020, python_want[2020]), xytext=(-30, -30),
                  textcoords='offset points', color=python_color,
                  arrowprops=dict(arrowstyle="->", connectionstyle="angle3,angleA=0,angleB=-90", color=python_color))
     plt.show()
