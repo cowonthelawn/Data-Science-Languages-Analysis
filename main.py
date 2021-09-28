@@ -65,7 +65,7 @@ def main():
     ax2.set_title("Growth of Use and Interest in Julia")
     ax2.set_xticks((2017, 2018, 2019, 2020, 2021))
     ax2.set_ylim(ymin=0, ymax=0.18)
-    ax2.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=None))
+    ax2.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=0))
     ax2.legend(loc="best")
     plt.show()
 
