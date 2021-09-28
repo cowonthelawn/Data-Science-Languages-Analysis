@@ -50,7 +50,6 @@ def main():
     ax1.set_ylim(ymin=0, ymax=1)
     ax1.yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
     ax1.legend(loc="best")
-    plt.show()
 
     # plot line chart showing growth of developers using Julia and wanting to use Julia
     # missing 2019 data points for Julia
@@ -67,7 +66,6 @@ def main():
     ax2.set_ylim(ymin=0, ymax=0.18)
     ax2.yaxis.set_major_formatter(mtick.PercentFormatter(1, decimals=0))
     ax2.legend(loc="best")
-    plt.show()
 
     # plot line chart showing growth of developers using and and wanting to use Python and R
     fig3, ax3 = plt.subplots(1)
