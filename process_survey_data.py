@@ -23,13 +23,13 @@ def check_for_dev_types(string_to_check):
 def main():
     # import the survey results
     print("Loading survey data")
-    df_survey_2021 = pd.read_csv(sys.path[0] + r'\data\developer_survey_2021\survey_results_public.csv')
-    df_survey_2020 = pd.read_csv(sys.path[0] + r'\data\developer_survey_2020\survey_results_public.csv')
-    df_survey_2019 = pd.read_csv(sys.path[0] + r'\data\developer_survey_2019\survey_results_public.csv')
+    df_survey_2021 = pd.read_csv(r".\data\developer_survey_2021\survey_results_public.csv")
+    df_survey_2020 = pd.read_csv(r".\data\developer_survey_2020\survey_results_public.csv")
+    df_survey_2019 = pd.read_csv(r".\data\developer_survey_2019\survey_results_public.csv")
     # ambiguous dtypes in 2018 survey, handled by setting them all to object
-    df_survey_2018 = pd.read_csv(sys.path[0] + r'\data\developer_survey_2018\survey_results_public.csv',
+    df_survey_2018 = pd.read_csv(r".\data\developer_survey_2018\survey_results_public.csv",
                                  dtype=object)
-    df_survey_2017 = pd.read_csv(sys.path[0] + r'\data\developer_survey_2017\survey_results_public.csv')
+    df_survey_2017 = pd.read_csv(r".\data\developer_survey_2017\survey_results_public.csv")
 
     # add a year field to each dataframe
     df_survey_2021["Year"] = 2021
@@ -69,6 +69,7 @@ def main():
     df_survey_combined = df_survey_combined[df_survey_combined["IsDataScientist"]]
 
     # engineer features determining if response indicated worked with applicable languages
+    print("Engineering new features")
     series_python_worked = df_survey_combined.apply(lambda x:
                                                     True if check_for_lang("Python", str(x["LanguageHaveWorkedWith"]))
                                                     else False, axis=1)
@@ -82,7 +83,6 @@ def main():
     df_survey_combined["RWorkedWith"] = series_r_worked
     df_survey_combined["JuliaWorkedWith"] = series_julia_worked
 
-    print("Engineering new features")
     # engineer features determining if response indicated wanted to work with applicable languages
     series_python_want = df_survey_combined.apply(lambda x:
                                                   True if check_for_lang("Python", str(x["LanguageWantToWorkWith"]))
@@ -100,4 +100,4 @@ def main():
     # remove responses that did not list any languages
     print("Cleaning data set")
     df_survey_combined.dropna(subset=("LanguageHaveWorkedWith", "LanguageWantToWorkWith"), inplace=True)
-    df_survey_combined.to_csv(sys.path[0] + r'\data\processed_survey_data.csv')
+    df_survey_combined.to_csv(r".\data\processed_survey_data.csv")
