@@ -1,4 +1,4 @@
-# Data-Science-Languages-Analysis
+# Data Science Languages Analysis
 Analysis of the use and popularity of Python, R, and Julia according to yearly Stack Overflow Developer Surveys.
 
 No data sets needs to be loaded as a pre-processed data set is included in the repo. Just download the repo and run main.py.
