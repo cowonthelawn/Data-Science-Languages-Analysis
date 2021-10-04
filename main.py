@@ -1,3 +1,9 @@
+# Data Science Languages Analysis
+# Robert Allen
+# Oct 4th, 2021
+# This is a project that uses Stack Overflows developer surveys to visualize and analyze the usage and desired usage
+# statistics for Python, R, and Julia
+
 from os.path import exists
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick

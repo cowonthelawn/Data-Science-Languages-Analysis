@@ -1,5 +1,10 @@
+# Data Science Languages Analysis
+# Robert Allen
+# Oct 4th, 2021
+# This script pulls and engineers the data from five stack overflow developer surveys into single dataframe for use in
+# the main visualization script
+
 import pandas as pd
-import sys
 
 def rename_df_index_and_columns(mapping, df):
     df_temp = df.copy()
